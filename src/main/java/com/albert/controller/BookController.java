@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.albert.domain.RestEntity;
 import com.albert.domain.table.Book;
 import com.albert.service.CommonService;
 import com.albert.utils.BookException;
@@ -19,12 +20,14 @@ public class BookController extends BaseController {
 	private CommonService commonService;
 	
 	@RequestMapping(value = "/{bookId}",method={RequestMethod.GET})
-	public Book book(@PathVariable Long bookId){
+	public RestEntity book(@PathVariable Long bookId){
 		try {
-			return commonService.findEntityById(Book.class,bookId);
+			if(bookId == null) throw new BookException("bookid不可为空");
+			Book b = commonService.findEntityById(Book.class, bookId);
+			return RestEntity.success(b);
 		} catch (BookException e) {
 			e.printStackTrace();
-			return null;
+			return RestEntity.failed(e.getMessage());
 		}
 	}
 	
