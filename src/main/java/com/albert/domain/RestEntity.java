@@ -50,7 +50,9 @@ public class RestEntity implements EntityBase {
 	public static RestEntity success(Object object){
 		return new RestEntity(1, "SUCCESS", object);
 	}
-	
+	public static RestEntity success(){
+		return new RestEntity(1, "SUCCESS");
+	}
 	public static RestEntity failed(){
 		return new RestEntity(-1, "FAILED");
 	}
