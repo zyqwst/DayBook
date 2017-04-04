@@ -1,31 +1,30 @@
-package com.albert.domain.table;
+package com.albert.domain.view;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 import com.albert.domain.EntityBase;
 @Entity
-@Table(name="t_book")
-public class Book implements EntityBase {
+@Table(name="vw_query_book")
+public class QueryBook implements EntityBase {
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 8088696606214103990L;
-	
+	private static final long serialVersionUID = -88022199612313642L;
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
 	private Long typeid;
+	
+	private String name;
 	
 	private String credate;
 	
 	private Double val;
 	
+	private Integer orderby;
 
 	public Long getId() {
 		return id;
@@ -35,6 +34,14 @@ public class Book implements EntityBase {
 		this.id = id;
 	}
 
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 
 	public Double getVal() {
 		return val;
@@ -42,6 +49,14 @@ public class Book implements EntityBase {
 
 	public void setVal(Double val) {
 		this.val = val;
+	}
+
+	public Integer getOrderby() {
+		return orderby;
+	}
+
+	public void setOrderby(Integer orderby) {
+		this.orderby = orderby;
 	}
 
 	public Long getTypeid() {
@@ -59,6 +74,5 @@ public class Book implements EntityBase {
 	public void setCredate(String credate) {
 		this.credate = credate;
 	}
-
 
 }
