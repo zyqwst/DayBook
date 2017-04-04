@@ -16,20 +16,17 @@ public  class  CommonDaoImpl implements CommonDao{
 
 	@Override
 	public <T extends EntityBase> void save(T t) throws BookException {
-		// TODO Auto-generated method stub
-		
+		em.persist(t);
 	}
 
 	@Override
 	public <T extends EntityBase> void update(T t) throws BookException {
-		// TODO Auto-generated method stub
-		
+		em.merge(t);
 	}
 
 	@Override
-	public void delete(Long id) throws BookException {
-		// TODO Auto-generated method stub
-		
+	public  <T extends EntityBase>  void deleteById(Class<T> clazz,Long id) throws BookException {
+		em.remove(findEntityById(clazz, id));
 	}
 
 	@Override
@@ -39,8 +36,12 @@ public  class  CommonDaoImpl implements CommonDao{
 
 	@Override
 	public <T extends EntityBase> T findEntity(String hql, List<Object> params) throws BookException {
-		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public <T extends EntityBase> void delete(T t) throws BookException {
+		em.remove(t);
 	}
 
 	
