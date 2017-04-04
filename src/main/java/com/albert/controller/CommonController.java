@@ -3,7 +3,8 @@
  */
 package com.albert.controller;
 
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -12,13 +13,10 @@ import org.springframework.web.bind.annotation.RestController;
  *
  */
 @RestController
-public class CommonController {
+public class CommonController extends BaseController{
 	@RequestMapping(value={"/","index"})
-	public String index(){
+	public String index(HttpServletRequest request){
+		System.out.println(request.getRequestURI());
 		return "系统已成功启动";
-	}
-	@RequestMapping("fuck")
-	public String fuck(){
-		return "系统已成功启ddd动";
 	}
 }
