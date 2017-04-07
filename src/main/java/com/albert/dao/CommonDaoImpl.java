@@ -1,21 +1,35 @@
 package com.albert.dao;
 
+import static org.springframework.data.jpa.repository.query.QueryUtils.toOrders;
+
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.LockModeType;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Repository;
+import org.springframework.util.Assert;
 
 import com.albert.domain.EntityBase;
 import com.albert.utils.BookException;
+import com.albert.utils.Page;
 @Repository
 @SuppressWarnings("unchecked")
-public  class  CommonDaoImpl implements CommonDao{
+public  class  CommonDaoImpl  implements CommonDao{
+
 	@PersistenceContext
 	EntityManager em;
-
+	
 	@Override
 	public <T extends EntityBase> void save(T t) throws BookException {
 		em.persist(t);
@@ -24,6 +38,7 @@ public  class  CommonDaoImpl implements CommonDao{
 	@Override
 	public <T extends EntityBase> void update(T t) throws BookException {
 		em.merge(t);
+		em.flush();
 	}
 
 	@Override
@@ -72,14 +87,19 @@ public  class  CommonDaoImpl implements CommonDao{
 		if(params!=null && params.size()>0){
 			for(int i = 1;i<=params.size();i++){
 				query.setParameter(i, params.get(i-1));
+				if(i%30==0){
+					em.flush();em.clear();
+				}
 			}
 		}
 		query.executeUpdate();
 	}
 
-	
+	public <T extends EntityBase> Page<T> findPage(Page<T> page) {
+		
+		return page;
+	}
+	       
 
-	
-	
-	
+
 }

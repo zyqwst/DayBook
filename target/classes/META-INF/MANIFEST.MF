@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
-Implementation-Vendor: Pivotal Software, Inc.
 Implementation-Title: DayBook
 Implementation-Version: 0.0.1-SNAPSHOT
+Built-By: albert
 Implementation-Vendor-Id: com.albert
 Class-Path: resources/ lib/spring-boot-starter-web-1.5.2.RELEASE.jar l
  ib/spring-boot-starter-1.5.2.RELEASE.jar lib/spring-boot-1.5.2.RELEAS
@@ -30,8 +30,8 @@ Class-Path: resources/ lib/spring-boot-starter-web-1.5.2.RELEASE.jar l
  pring-tx-4.3.7.RELEASE.jar lib/slf4j-api-1.7.24.jar lib/jcl-over-slf4
  j-1.7.24.jar lib/spring-aspects-4.3.7.RELEASE.jar lib/sqlite-jdbc-3.7
  .2.jar lib/spring-core-4.3.7.RELEASE.jar
-Build-Jdk: 1.7.0_79
-Built-By: Administrator
+Build-Jdk: 1.8.0_121
 Created-By: Maven Integration for Eclipse
+Implementation-Vendor: Pivotal Software, Inc.
 Main-Class: com.albert.App
 

@@ -3,6 +3,7 @@ package com.albert.controller;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,9 +27,10 @@ public class BookController extends BaseController {
 	@Resource
 	private BookService bookService;
 	@RequestMapping(value = "/{bookId}",method={RequestMethod.GET})
-	public RestEntity getBook(@PathVariable Long bookId) throws BookException{
+	public RestEntity getBook(@PathVariable Long bookId,HttpServletRequest request) throws BookException{
 		try {
 			if(bookId == null) throw new BookException("bookid不可为空");
+			System.out.println(getRequestMap(request));
 			Book b = commonService.findEntityById(Book.class, bookId);
 			return RestEntity.success(b);
 		} catch (BookException e) {

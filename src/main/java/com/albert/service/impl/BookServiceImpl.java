@@ -18,7 +18,7 @@ public class BookServiceImpl implements BookService {
 	@Override
 	public void update(Book book) throws BookException {
 		try {
-			commonDao.deleteById(Book.class, book.getId());
+			commonDao.deleteById(Book.class, 1l);
 			book.setId(null);
 			commonDao.save(book);
 		} catch (Exception e) {

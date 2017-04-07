@@ -7,11 +7,12 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 
+import com.albert.utils.RequestMap;
+
 public abstract class BaseController {
 	
 	@Autowired
-	private  
-	ApplicationContext context;  
+	private ApplicationContext context;  
 	
 	protected HttpSession getSession(HttpServletRequest request){
 		return request.getSession();
@@ -25,5 +26,9 @@ public abstract class BaseController {
 	}
 	public void setContext(ApplicationContext context) {
 		this.context = context;
+	}
+	
+	public RequestMap getRequestMap(HttpServletRequest request){
+		return new RequestMap(request);
 	}
 }
