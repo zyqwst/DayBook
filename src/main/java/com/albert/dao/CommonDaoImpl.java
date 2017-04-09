@@ -95,8 +95,18 @@ public  class  CommonDaoImpl  implements CommonDao{
 		query.executeUpdate();
 	}
 
-	public <T extends EntityBase> Page<T> findPage(Page<T> page) {
-		
+	public <T extends EntityBase> Page<T> findPage(Class<T> clazz,Page<T> page) {
+		Query query = em.createQuery(" from " + clazz.getName()+page.getRequestMap().getJpql().toString());
+		query.setFirstResult(page.getPageNumber()*page.getPageSize());
+		query.setMaxResults(page.getPageSize());
+		List<Object> params = page.getRequestMap().getParams();
+		if(page.getRequestMap().getParams()!=null && params.size()>0){
+			for(int i = 1;i<=params.size();i++){
+				query.setParameter(i, params.get(i-1));
+			}
+		}
+		List<T> results = query.getResultList();
+		page.setResults(results);
 		return page;
 	}
 	       

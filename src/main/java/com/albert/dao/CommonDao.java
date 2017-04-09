@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.albert.domain.EntityBase;
 import com.albert.utils.BookException;
+import com.albert.utils.Page;
 public interface  CommonDao{
 	public<T extends EntityBase> void save(T t) throws BookException;
 	
@@ -22,4 +23,6 @@ public interface  CommonDao{
 	public void flush();
 	
 	public <T extends EntityBase> void update(Class<T> clazz,String hql,List<Object> params) throws BookException;
+	
+	public <T extends EntityBase> Page<T> findPage(Class<T> clazz ,Page<T> page) throws BookException;
 }
