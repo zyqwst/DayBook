@@ -68,7 +68,7 @@ public class BookController extends BaseController {
 		try {
 			RequestMap map = getRequestMap(request);
 			ConvertSqlByForm.convert(map);
-			Page<QueryBook> pages = commonService.findPage(QueryBook.class, new Page<QueryBook>(page, size));
+			Page<QueryBook> pages = commonService.findPage(QueryBook.class, new Page<QueryBook>(page, size,map));
 			return RestEntity.success(pages);
 		} catch (BookException e) {
 			e.printStackTrace();

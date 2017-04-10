@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 
+import com.albert.utils.Page;
 import com.albert.utils.RequestMap;
 
 public abstract class BaseController {

@@ -36,7 +36,15 @@ public class Page<T> extends PageRequest {
 		super(page, size, sort);
 	}
 	public Page(int page, int size) {
-		this(page, size, null);
+		super(page, size, null);
+	}
+	public Page(int page, int size, Sort sort,RequestMap map){
+		super(page, size, sort);
+		this.requestMap = map;
+	}
+	public Page(int page, int size,RequestMap map) {
+		super(page, size, null);
+		this.requestMap = map;
 	}
 	public List<T> getResults() {
 		return results;
