@@ -5,6 +5,8 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.http.HttpRequest;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -68,7 +70,11 @@ public class BookController extends BaseController {
 		try {
 			RequestMap map = getRequestMap(request);
 			ConvertSqlByForm.convert(map);
-			Page<QueryBook> pages = commonService.findPage(QueryBook.class, new Page<QueryBook>(page, size,map));
+			if(size==null){
+				page = Page.MAX_PAGE;
+				size = Page.MAX_SIZE;
+			}
+			Page<QueryBook> pages = commonService.findPage(QueryBook.class, new Page<QueryBook>(page, size,new Sort(Direction.DESC, "credate"),map));
 			return RestEntity.success(pages);
 		} catch (BookException e) {
 			e.printStackTrace();

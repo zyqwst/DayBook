@@ -17,7 +17,9 @@ import org.springframework.data.domain.Sort;
 *  
 */
 public class Page<T> extends PageRequest {
-
+	
+	public final static int MAX_SIZE = 10000000;
+	public final static int MAX_PAGE = 0;
 	/**
 	 * 
 	 */
