@@ -29,6 +29,10 @@ public class RequestMap extends HashMap<String,Object> implements Map<String,Obj
 	private List<Object> params = new ArrayList<Object>();
 	
 	public RequestMap(HttpServletRequest request){
+		if(request==null) {
+			map = new HashMap<>(); 
+			return;
+		}
 		this.request = request;
 		Map<?, ?> params = request.getParameterMap();
 		Iterator<?> it = params.entrySet().iterator();

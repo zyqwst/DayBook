@@ -20,47 +20,48 @@ public class ConvertSqlByForm {
 	public final static String IN = "_in";
 	public final static String NOT_IN = "_notin";
 	public final static String BETWEEN = "_between";
+	public final static String BETWEENAND = "_betweenand";
 	public final static String AND = "_and";
-	public final static String EXCEPT = "_except";
 	/**
 	 * @param map 
 	 * @return
 	 */
 	public static String convert(RequestMap map){
-		StringBuffer sb = new StringBuffer(" where 1=1 ");
 		if(map== null || map.size()==0) return "";
-		Iterator it = map.entrySet().iterator();
+		Iterator it = map.map.entrySet().iterator();
+		map.getJpql().append(" where 1=1 ");
 		while(it.hasNext()){
 			Map.Entry entry = (Map.Entry) it.next();
 			String key = (String) entry.getKey();
 			String value = (String) entry.getValue();
 			if(StringUtils.isEmpty(value)) continue;
-			if(key.endsWith(EXCEPT)){
+			if(key.endsWith(AND)){
+				map.getJpql().append(" and "+key.substring(0, key.indexOf(AND))+"=? ");
+				map.getParams().add(value);
 				continue;
 			}
 			if(key.endsWith(IN)){
+				map.getJpql().append(" and "+ key.substring(0, key.indexOf(IN))+" in ");
 				strSplitByComma(map, value);
 				continue;
 			}
 			if(key.endsWith(NOT_IN)){
+				map.getJpql().append(" and "+ key.substring(0, key.indexOf(NOT_IN))+" not in ");
 				strSplitByComma(map, value);
 				continue;
 			}
 			if(key.endsWith(BETWEEN)){
-				map.getJpql().append(" between ? ");
+				map.getJpql().append(" and "+key.substring(0, key.indexOf(BETWEEN))+" between ? ");
 				map.getParams().add(DateUtils.getBeginDate(value));
 				continue;
 			}
-			if(key.endsWith(AND)){
+			if(key.endsWith(BETWEENAND)){
 				map.getJpql().append(" and ? ");
 				map.getParams().add(DateUtils.getEndDate(value));
 				continue;
 			}
-			map.getJpql().append(" and ? ");
-			map.getParams().add(value);
-			
 		}
-		return sb.toString();
+		return map.getJpql().toString();
 	}
 	/**
 	 * 用逗号分隔并生成
@@ -78,4 +79,5 @@ public class ConvertSqlByForm {
 		jpql.deleteCharAt(jpql.lastIndexOf(","));
 		jpql.append(") "); 
 	}
+	
 }

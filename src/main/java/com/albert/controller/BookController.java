@@ -5,6 +5,7 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.http.HttpRequest;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,6 +17,9 @@ import com.albert.domain.view.QueryBook;
 import com.albert.service.BookService;
 import com.albert.service.CommonService;
 import com.albert.utils.BookException;
+import com.albert.utils.ConvertSqlByForm;
+import com.albert.utils.Page;
+import com.albert.utils.RequestMap;
 import com.albert.utils.Value;
 
 @RestController
@@ -30,7 +34,6 @@ public class BookController extends BaseController {
 	public RestEntity getBook(@PathVariable Long bookId,HttpServletRequest request) throws BookException{
 		try {
 			if(bookId == null) throw new BookException("bookid不可为空");
-			System.out.println(getRequestMap(request));
 			Book b = commonService.findEntityById(Book.class, bookId);
 			return RestEntity.success(b);
 		} catch (BookException e) {
@@ -61,10 +64,12 @@ public class BookController extends BaseController {
 		}
 	}
 	@RequestMapping(value = "/list")
-	public RestEntity list(Book book) throws BookException{
+	public RestEntity list(HttpServletRequest request,Integer page,Integer size) throws BookException{
 		try {
-			List<QueryBook> list = commonService.findAll(QueryBook.class, " where credate=? ", new Value().add(book.getCredate()).getParams());
-			return RestEntity.success(list);
+			RequestMap map = getRequestMap(request);
+			ConvertSqlByForm.convert(map);
+			Page<QueryBook> pages = commonService.findPage(QueryBook.class, new Page<QueryBook>(page, size));
+			return RestEntity.success(pages);
 		} catch (BookException e) {
 			e.printStackTrace();
 			return RestEntity.failed(e.getMessage());

@@ -3,6 +3,7 @@
  */
 package com.albert.utils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.data.domain.PageRequest;
@@ -22,9 +23,9 @@ public class Page<T> extends PageRequest {
 	 */
 	private static final long serialVersionUID = 1251803627710893735L;
 	/**查询到的结果*/
-	private List<T> results;
+	private List<T> results = new ArrayList<>();
 	/**查询参数，生成where 条件*/
-	private RequestMap requestMap;
+	private RequestMap requestMap = new RequestMap(null);
 	
 	/**
 	 * @param page

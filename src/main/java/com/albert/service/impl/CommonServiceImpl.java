@@ -11,6 +11,7 @@ import com.albert.dao.CommonDao;
 import com.albert.domain.EntityBase;
 import com.albert.service.CommonService;
 import com.albert.utils.BookException;
+import com.albert.utils.Page;
 
 @Service
 @Transactional
@@ -53,6 +54,14 @@ public class CommonServiceImpl implements CommonService{
 	public <T extends EntityBase>void updateByHql(Class<T> clazz, String hql, List<Object> params)
 			throws BookException {
 		commonDao.update(clazz, hql, params);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.albert.service.CommonService#findPage(java.lang.Class, com.albert.utils.Page)
+	 */
+	@Override
+	public <T extends EntityBase> Page<T> findPage(Class<T> clazz, Page<T> page) throws BookException {
+		return commonDao.findPage(clazz, page);
 	}
 
 	
