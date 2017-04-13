@@ -33,7 +33,7 @@ public class BookController extends BaseController {
 	@Resource
 	private BookService bookService;
 	@RequestMapping(value = "/{bookId}",method={RequestMethod.GET})
-	public RestEntity getBook(@PathVariable Long bookId,HttpServletRequest request) throws BookException{
+	public RestEntity getBook(@PathVariable Long bookId,HttpServletRequest request) {
 		try {
 			if(bookId == null) throw new BookException("bookid不可为空");
 			Book b = commonService.findEntityById(Book.class, bookId);
@@ -45,7 +45,7 @@ public class BookController extends BaseController {
 	}
 	
 	@RequestMapping(value = "/{bookId}",method={RequestMethod.DELETE})
-	public RestEntity deleteBook(@PathVariable Long bookId) throws BookException{
+	public RestEntity deleteBook(@PathVariable Long bookId){
 		try {
 			if(bookId == null) throw new BookException("bookid不可为空");
 		    commonService.delete(Book.class,bookId);
@@ -56,7 +56,7 @@ public class BookController extends BaseController {
 		}
 	}
 	@RequestMapping(value = "/update")
-	public RestEntity updateBook(Book book) throws BookException{
+	public RestEntity updateBook(Book book) {
 		try {
 			bookService.update(book);
 			return RestEntity.success(book);
@@ -66,7 +66,7 @@ public class BookController extends BaseController {
 		}
 	}
 	@RequestMapping(value = "/list")
-	public RestEntity list(HttpServletRequest request,Integer page,Integer size) throws BookException{
+	public RestEntity list(HttpServletRequest request,Integer page,Integer size){
 		try {
 			RequestMap map = getRequestMap(request);
 			ConvertSqlByForm.convert(map);
