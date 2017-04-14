@@ -1,14 +1,12 @@
 package com.albert.controller;
 
-import java.util.List;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
-import org.springframework.http.HttpRequest;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,7 +20,6 @@ import com.albert.utils.BookException;
 import com.albert.utils.ConvertSqlByForm;
 import com.albert.utils.Page;
 import com.albert.utils.RequestMap;
-import com.albert.utils.Value;
 
 @RestController
 @RequestMapping("/book")
@@ -43,7 +40,6 @@ public class BookController extends BaseController {
 			return RestEntity.failed(e.getMessage());
 		}
 	}
-	
 	@RequestMapping(value = "/{bookId}",method={RequestMethod.DELETE})
 	public RestEntity deleteBook(@PathVariable Long bookId){
 		try {
@@ -80,6 +76,12 @@ public class BookController extends BaseController {
 			e.printStackTrace();
 			return RestEntity.failed(e.getMessage());
 		}
+	}
+	@RequestMapping(value="/save",method={RequestMethod.POST})
+	public RestEntity save(Book book){
+		System.out.println("访问");
+		System.out.println(book);
+		return RestEntity.success();
 	}
 	
 	public BookService getBookService() {

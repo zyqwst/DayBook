@@ -27,6 +27,11 @@ public class Book implements EntityBase {
 	private Double val;
 	
 
+	@Override
+	public String toString() {
+		return "Book [id=" + id + ", typeid=" + typeid + ", credate=" + credate + ", val=" + val + "]";
+	}
+
 	public Long getId() {
 		return id;
 	}
