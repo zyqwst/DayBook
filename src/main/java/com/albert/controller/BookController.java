@@ -1,12 +1,13 @@
 package com.albert.controller;
 
+import java.text.SimpleDateFormat;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,6 +21,7 @@ import com.albert.utils.BookException;
 import com.albert.utils.ConvertSqlByForm;
 import com.albert.utils.Page;
 import com.albert.utils.RequestMap;
+import com.albert.utils.Value;
 
 @RestController
 @RequestMapping("/book")
@@ -64,6 +66,7 @@ public class BookController extends BaseController {
 	@RequestMapping(value = "/list")
 	public RestEntity list(HttpServletRequest request,Integer page,Integer size){
 		try {
+			System.out.println("请求");
 			RequestMap map = getRequestMap(request);
 			ConvertSqlByForm.convert(map);
 			if(size==null){
@@ -83,7 +86,16 @@ public class BookController extends BaseController {
 		System.out.println(book);
 		return RestEntity.success();
 	}
-	
+	@RequestMapping(value="/month")
+	public RestEntity monthBill(String yearAndMonth){
+		try {
+			Double db = commonService.getSum(Book.class, "val", " where credate like ?", new Value().add(yearAndMonth+"%").getParams());
+			return RestEntity.success(db);
+		} catch (BookException e) {
+			e.printStackTrace();
+			return RestEntity.failed(e.getMessage());
+		}
+	}
 	public BookService getBookService() {
 		return bookService;
 	}

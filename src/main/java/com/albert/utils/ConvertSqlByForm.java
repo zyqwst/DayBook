@@ -22,6 +22,7 @@ public class ConvertSqlByForm {
 	public final static String BETWEEN = "_between";
 	public final static String BETWEENAND = "_betweenand";
 	public final static String AND = "_and";
+	public final static String LIKE = "_like";
 	/**
 	 * @param map 
 	 * @return
@@ -38,6 +39,11 @@ public class ConvertSqlByForm {
 			if(key.endsWith(AND)){
 				map.getJpql().append(" and "+key.substring(0, key.indexOf(AND))+"=? ");
 				map.getParams().add(value);
+				continue;
+			}
+			if(key.endsWith(LIKE)){
+				map.getJpql().append(" and "+key.substring(0, key.indexOf(LIKE))+" like ? ");
+				map.getParams().add("%"+value+"%");
 				continue;
 			}
 			if(key.endsWith(IN)){

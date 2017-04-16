@@ -109,7 +109,15 @@ public  class  CommonDaoImpl  implements CommonDao{
 		page.setResults(results);
 		return page;
 	}
-	       
-
+	@Override
+	public <T extends EntityBase> Double getSum(Class<T> clazz,String field,String hql, List<Object> params) throws BookException {
+		Query  query = em.createQuery("select sum("+field+") FROM " + clazz.getName() + hql );
+		if(params!=null && params.size()>0){
+			for(int i = 1;i<=params.size();i++){
+				query.setParameter(i, params.get(i-1));
+			}
+		}
+		return  (Double) query.getSingleResult();         
+	}
 
 }

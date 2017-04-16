@@ -25,6 +25,8 @@ public class QueryBook implements EntityBase {
 	private Double val;
 	
 	private Integer orderby;
+	
+	private String icon;
 
 	public Long getId() {
 		return id;
@@ -73,6 +75,14 @@ public class QueryBook implements EntityBase {
 
 	public void setCredate(String credate) {
 		this.credate = credate;
+	}
+
+	public String getIcon() {
+		return icon;
+	}
+
+	public void setIcon(String icon) {
+		this.icon = icon;
 	}
 
 }

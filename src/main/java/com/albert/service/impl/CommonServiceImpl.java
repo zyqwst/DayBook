@@ -56,12 +56,14 @@ public class CommonServiceImpl implements CommonService{
 		commonDao.update(clazz, hql, params);
 	}
 
-	/* (non-Javadoc)
-	 * @see com.albert.service.CommonService#findPage(java.lang.Class, com.albert.utils.Page)
-	 */
 	@Override
 	public <T extends EntityBase> Page<T> findPage(Class<T> clazz, Page<T> page) throws BookException {
 		return commonDao.findPage(clazz, page);
+	}
+
+	@Override
+	public <T extends EntityBase> Double getSum(Class<T> clazz,  String field,String hql,List<Object> params) throws BookException {
+		return commonDao.getSum(clazz, field, hql, params);
 	}
 
 	
