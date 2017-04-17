@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.albert.AppTest;
 import com.albert.domain.table.Book;
+import com.albert.domain.table.Dictionary;
 import com.albert.utils.BookException;
 import com.albert.utils.Page;
 
@@ -16,9 +17,9 @@ public class DaoTest extends AppTest{
 	CommonDao dao;
 	@Test
 	public void test(){
-		Page<Book> page = new Page<Book>(0, 1);
+		Page<Dictionary> page = new Page<Dictionary>(0, 1);
 		try {
-			Page<Book> list = dao.findPage(Book.class, page);
+			Page<Dictionary> list = dao.findPage(Dictionary.class, page);
 			System.out.println(list.getResults());
 		} catch (BookException e) {
 			e.printStackTrace();

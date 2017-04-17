@@ -30,6 +30,9 @@ public class Dictionary implements EntityBase {
 	private String name;
 	
 	private Integer status;
+	private Long typeid;
+	
+	private String icon;
 	public Dictionary() {
 	}
 
@@ -64,6 +67,22 @@ public class Dictionary implements EntityBase {
 	@Override
 	public String toString() {
 		return "Dictionary [id=" + id + ", name=" + name + ", status=" + status + "]";
+	}
+
+	public Long getTypeid() {
+		return typeid;
+	}
+
+	public void setTypeid(Long typeid) {
+		this.typeid = typeid;
+	}
+
+	public String getIcon() {
+		return icon;
+	}
+
+	public void setIcon(String icon) {
+		this.icon = icon;
 	}
 	
 	
