@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.albert</groupId>
-  <artifactId>SpringBootDmo</artifactId>
+  <artifactId>DayBook</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>jar</packaging>
 
@@ -76,10 +76,9 @@
 				<configuration>
 					<appendAssemblyId>false</appendAssemblyId>
 					<descriptors>
-						<descriptor>assembly.xml</descriptor>
-						<!-- <descriptor>src/main/resources/assembly.xml</descriptor> -->
+					<descriptor>src/main/resources/assembly.xml</descriptor> 
 					</descriptors>
-					<outputDirectory>${project.build.directory}/dist/</outputDirectory>
+					<outputDirectory>${project.build.directory}/</outputDirectory>
 				</configuration>
 			</plugin>
 			<plugin>

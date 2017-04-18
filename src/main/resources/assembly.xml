@@ -27,7 +27,7 @@
 	<fileSets>
 		<fileSet>
 			<directory>src/main/resources/</directory>
-			<outputDirectory>/conf</outputDirectory>
+			<outputDirectory>conf</outputDirectory>
 		</fileSet>
 	</fileSets>
 </assembly>
