@@ -2,6 +2,7 @@ package com.albert.dao;
 
 import static org.springframework.data.jpa.repository.query.QueryUtils.toOrders;
 
+import java.util.Iterator;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -16,6 +17,7 @@ import javax.persistence.criteria.Root;
 
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Order;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.Assert;
@@ -96,7 +98,13 @@ public  class  CommonDaoImpl  implements CommonDao{
 	}
 
 	public <T extends EntityBase> Page<T> findPage(Class<T> clazz,Page<T> page) {
-		Query query = em.createQuery(" from " + clazz.getName()+page.getRequestMap().getJpql().toString());
+		Iterator<Order> it = page.getSort().iterator();
+		StringBuilder jpql = new StringBuilder(" from " + clazz.getName()+page.getRequestMap().getJpql().toString());
+		while(it.hasNext()){
+			Order o= it.next();
+			jpql.append(" order by "+o.getProperty()+" "+o.getDirection());
+		}
+		Query query = em.createQuery(jpql.toString());
 		query.setFirstResult(page.getPageNumber()*page.getPageSize());
 		query.setMaxResults(page.getPageSize());
 		List<Object> params = page.getRequestMap().getParams();

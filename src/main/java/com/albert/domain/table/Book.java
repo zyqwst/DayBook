@@ -5,6 +5,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 import com.albert.domain.EntityBase;
 @Entity
@@ -19,11 +23,11 @@ public class Book implements EntityBase {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	
+	@NotNull(message="请选择消费类型")
 	private Long typeid;
-	
+	@NotEmpty(message="请选择消费日期")
 	private String credate;
-	
+	@NotNull(message="请输入消费金额")
 	private Double val;
 	
 

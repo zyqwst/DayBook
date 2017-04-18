@@ -56,12 +56,13 @@ import com.albert.domain.RestEntity;
 	  @ResponseStatus(HttpStatus.BAD_REQUEST)
 	  @ExceptionHandler(MethodArgumentNotValidException.class)
 	  public RestEntity handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
-	    logger.error("参数验证失败", e);
+	    logger.error("参数验证失败", e.getMessage());
 	    BindingResult result = e.getBindingResult();
 	    FieldError error = result.getFieldError();
 	    String field = error.getField();
 	    String code = error.getDefaultMessage();
 	    String message = String.format("%s:%s", field, code);
+	    System.out.println(message);
 	    return RestEntity.failed(message);
 	  }
 
