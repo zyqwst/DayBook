@@ -21,7 +21,7 @@ mvn clean package assembly:single -Pprod -Dmaven.test.skip=true
 ├── conf
 ├── DayBook-0.0.1-SNAPSHOT.jar
 ├── lib
-├──	DB.db （SQLite数据库文件，需要从项目根目录自行拷贝）
+├── DB.db （SQLite数据库文件，需要从项目根目录自行拷贝）
 ```
 # 系统启动
 上一步打包后，从命令行进入target/DayBook根目录；执行 `java -jar DayBook-0.0.1-SNAPSHOT.jar`即可看到启动过程。
