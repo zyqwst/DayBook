@@ -27,6 +27,6 @@ mvn clean package assembly:single -Pprod -Dmaven.test.skip=true
 上一步打包后，从命令行进入target/DayBook根目录；执行 `java -jar DayBook-0.0.1-SNAPSHOT.jar`即可看到启动过程。
 如果不需要本机JRE运行，在window环境下，拷贝jre到target/DayBook根目录，新建start.bat文件，内容为
 ```
-start jre/javaw -jar  DayBook-0.0.1-SNAPSHOT.jar
+start jre/bin/javaw -jar  DayBook-0.0.1-SNAPSHOT.jar
 ```
 双击start.bat即可启动
