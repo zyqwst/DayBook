@@ -43,6 +43,7 @@ public class CommonController extends BaseController implements ErrorController 
 	@RequestMapping(value = "/dictionary")
 	public RestEntity dictionary(HttpServletRequest request,Long typeid){
 		try {
+			System.out.println("web获取");
 			List<Dictionary> list =  commonService.findAll(Dictionary.class, " where typeid=? ", new Value().add(typeid).getParams());
 			return RestEntity.success(list);
 		} catch (BookException e) {

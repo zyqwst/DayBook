@@ -10,4 +10,22 @@
 - APP：Ionic2  （三种方式 APP 微信 HTML） GitHub托管地址 [DayBookApp](https://github.com/zyqwst/DayBookApp)
 
 # 内容说明
-系统默认启动端口是9971，项目启动后可以
+系统默认启动端口是9971，修改端口可以再src/main/resources/application.properties文件中修改 
+####server.port=端口
+
+# 系统打包
+在项目根目录下直接运行下面的命令
+mvn clean package assembly:single -Pprod -Dmaven.test.skip=true
+打包成功后在根目录下target/DayBook即为打包的结果。
+```
+├── conf
+├── DayBook-0.0.1-SNAPSHOT.jar
+├── lib
+├──	DB.db （SQLite数据库文件，需要从项目根目录自行拷贝）
+```
+# 系统启动
+上一步打包后，从命令行进入target/DayBook根目录；执行 `java -jar DayBook-0.0.1-SNAPSHOT.jar`即可看到启动过程。
+
+
+
+
