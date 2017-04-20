@@ -34,11 +34,11 @@ public class ConvertSqlByForm {
 		while(it.hasNext()){
 			Map.Entry entry = (Map.Entry) it.next();
 			String key = (String) entry.getKey();
-			String value = (String) entry.getValue();
+			Object value =  entry.getValue();
 			if(StringUtils.isEmpty(value)) continue;
 			if(key.endsWith(AND)){
 				map.getJpql().append(" and "+key.substring(0, key.indexOf(AND))+"=? ");
-				map.getParams().add(value);
+				map.getParams().add(convertValue(value));
 				continue;
 			}
 			if(key.endsWith(LIKE)){
@@ -57,13 +57,13 @@ public class ConvertSqlByForm {
 				continue;
 			}
 			if(key.endsWith(BETWEEN)){
-				map.getJpql().append(" and "+key.substring(0, key.indexOf(BETWEEN))+" between ? ");
-				map.getParams().add(DateUtils.getBeginDate(value));
+				map.getJpql().append(" and date("+key.substring(0, key.indexOf(BETWEEN))+") between date(?) ");
+				map.getParams().add(DateUtils.getTrDate2(DateUtils.getBeginDate(value)));
 				continue;
 			}
 			if(key.endsWith(BETWEENAND)){
-				map.getJpql().append(" and ? ");
-				map.getParams().add(DateUtils.getEndDate(value));
+				map.getJpql().append(" and date(?) ");
+				map.getParams().add(DateUtils.getTrDate2(DateUtils.getEndDate(value)));
 				continue;
 			}
 		}
@@ -73,8 +73,8 @@ public class ConvertSqlByForm {
 	 * 用逗号分隔并生成
 	 * @return
 	 */
-	public static void strSplitByComma(RequestMap map,String str){
-		String[] split = str.split(",");
+	public static void strSplitByComma(RequestMap map,Object str){
+		String[] split = str.toString().split(",");
 		StringBuilder jpql = map.getJpql();
 		List<Object> params = map.getParams();
 		jpql.append(" (");
@@ -85,5 +85,13 @@ public class ConvertSqlByForm {
 		jpql.deleteCharAt(jpql.lastIndexOf(","));
 		jpql.append(") "); 
 	}
-	
+	public static Object convertValue(Object value){
+		if(value.toString().endsWith("_LONG")){
+			return Long.parseLong(value.toString().replaceAll("_LONG", ""));
+		}
+		if(value.toString().endsWith("_INTEGER")){
+			return Integer.parseInt(value.toString().replaceAll("_INTEGER", ""));
+		}
+		return null;
+	}
 }

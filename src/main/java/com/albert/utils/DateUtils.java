@@ -88,7 +88,19 @@ public class DateUtils {
 		}
 		return trDate;
 	}
-
+	public static String getTrDate2(Date date) {
+		if (date == null) {
+			return null;
+		}
+		SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String trDate = null;
+		try {
+			trDate = sdf1.format(date);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return trDate;
+	}
 	/***
 	 * 将日期格式的字符串转换成日期格式并格式化为yyyy-mm-dd 00:00:00
 	 * 
