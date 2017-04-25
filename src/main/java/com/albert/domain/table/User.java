@@ -31,6 +31,8 @@ public class User implements EntityBase {
 	private Integer type;
 	
 	private Integer status;
+	/**所属家庭*/
+	private Integer family;
 
 	public Long getId() {
 		return id;
@@ -78,6 +80,14 @@ public class User implements EntityBase {
 
 	public void setStatus(Integer status) {
 		this.status = status;
+	}
+
+	public Integer getFamily() {
+		return family;
+	}
+
+	public void setFamily(Integer family) {
+		this.family = family;
 	}
 	
 }

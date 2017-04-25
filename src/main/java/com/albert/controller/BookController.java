@@ -1,10 +1,5 @@
 package com.albert.controller;
 
-import java.text.SimpleDateFormat;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -21,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.albert.domain.RestEntity;
 import com.albert.domain.table.Book;
 import com.albert.domain.view.QueryBook;
+import com.albert.security.Authorization;
 import com.albert.service.BookService;
 import com.albert.service.CommonService;
 import com.albert.utils.BookException;
@@ -69,6 +65,7 @@ public class BookController extends BaseController {
 			return RestEntity.failed(e.getMessage());
 		}
 	}
+	@Authorization
 	@RequestMapping(value = "/list")
 	public RestEntity list(HttpServletRequest request,Integer page,Integer size){
 		try {

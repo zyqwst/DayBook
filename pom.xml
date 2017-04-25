@@ -33,7 +33,11 @@
          <groupId>org.springframework.boot</groupId>
          <artifactId>spring-boot-starter-data-jpa</artifactId>
      </dependency>
-    <!-- https://mvnrepository.com/artifact/org.xerial/sqlite-jdbc -->
+     <dependency>
+	    <groupId>org.springframework.boot</groupId>
+	    <artifactId>spring-boot-starter-redis</artifactId>
+	    <version>1.4.6.RELEASE</version>
+	</dependency>
 	<dependency>
 	    <groupId>org.xerial</groupId>
 	    <artifactId>sqlite-jdbc</artifactId>
@@ -51,7 +55,10 @@
          <artifactId>spring-boot-starter-test</artifactId>
          <scope>test</scope>
      </dependency>
+     
+     
   </dependencies>
+  
   <build>
 		<finalName>DayBook</finalName>
 		<resources>
