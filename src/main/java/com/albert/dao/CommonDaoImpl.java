@@ -127,5 +127,5 @@ public  class  CommonDaoImpl  implements CommonDao{
 		}
 		return  (Double) query.getSingleResult();         
 	}
-
+	
 }
