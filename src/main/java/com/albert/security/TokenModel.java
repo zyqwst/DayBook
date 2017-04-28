@@ -6,17 +6,17 @@ package com.albert.security;
  */
 public class TokenModel {
     // 用户 id
-    private long userId;
+    private Long userId;
     // 随机生成的 uuid
     private String token;
     public TokenModel (long userId, String token) {
         this.userId = userId;
         this.token = token;
     }
-    public long getUserId () {
+    public Long getUserId () {
         return userId;
     }
-    public void setUserId (long userId) {
+    public void setUserId (Long userId) {
         this.userId = userId;
     }
     public String getToken () {
@@ -25,4 +25,8 @@ public class TokenModel {
     public void setToken (String token) {
         this.token = token;
     }
+	@Override
+	public String toString() {
+		return "TokenModel [userId=" + userId + ", token=" + token + "]";
+	}
 }

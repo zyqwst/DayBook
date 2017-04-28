@@ -1,0 +1,7 @@
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+         xsi:noNamespaceSchemaLocation="ehcache.xsd">  
+    <cache name="user_token"  
+           maxElementsInMemory="2000"  
+           eternal="true">  
+    </cache>  
+</ehcache>  

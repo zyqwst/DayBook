@@ -1,4 +1,4 @@
-package com.albert.utils;
+package com.albert.domain;
 
 public class Constants {
 
