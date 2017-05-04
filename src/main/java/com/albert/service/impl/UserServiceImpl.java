@@ -12,8 +12,10 @@ import org.springframework.util.StringUtils;
 import com.albert.dao.CommonDao;
 import com.albert.domain.table.User;
 import com.albert.security.EhcacheTokenManager;
+import com.albert.security.TokenModel;
 import com.albert.service.UserService;
 import com.albert.utils.BookException;
+import com.albert.utils.MD5;
 import com.albert.utils.Value;
 
 /** 
@@ -39,12 +41,16 @@ public class UserServiceImpl implements UserService {
 	public void login(User user) throws BookException {
 		User u = null;
 		if(user.getId()!=null){
-			u = commonDao.findEntity(User.class, " where id=? and password=?", new Value().add(user.getId()).add(user.getPassword()).getParams());
+			u = commonDao.findEntity(User.class, " where id=? ", new Value().add(user.getId()).getParams());
 		}else if(StringUtils.isEmpty(user.getName())){
-			u = commonDao.findEntity(User.class, " where (name=? or alias=?) and password=?", new Value().add(user.getName()).add(user.getName()).add(user.getPassword()).getParams());
+			u = commonDao.findEntity(User.class, " where name=? or alias=? ", new Value().add(user.getName()).add(user.getName()).getParams());
 		}
 		if(u==null) throw new BookException("用户名或密码不存在");
-		tokenManager.createToken(u.getId());
+		if(!new MD5(u.getPassword()).compute().equals(user.getPassword().toUpperCase())){
+			throw new BookException("用户名或密码不存在");
+		}
+		TokenModel token =tokenManager.createToken(u.getId());
+		user.setToken(token.getToken());
 	}
 
 	public CommonDao getCommonDao() {

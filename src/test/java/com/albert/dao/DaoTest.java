@@ -1,12 +1,9 @@
 package com.albert.dao;
 
-import java.util.List;
-
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.albert.AppTest;
-import com.albert.domain.table.Book;
 import com.albert.domain.table.Dictionary;
 import com.albert.utils.BookException;
 import com.albert.utils.Page;

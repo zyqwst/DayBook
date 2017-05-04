@@ -9,8 +9,5 @@ import com.albert.utils.Page;
 
 public class Test {
 	public static void main(String[] args) {
-		
-		Page<Book> page = new Page(1, 10, new Sort(Direction.DESC, "credate"));
-		System.out.println(page.getPageSize());
 	}
 }

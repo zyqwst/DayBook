@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.albert.domain.EntityBase;
 
@@ -32,7 +33,9 @@ public class User implements EntityBase {
 	
 	private Integer status;
 	/**所属家庭*/
-	private Integer family;
+	private Integer familyid;
+	@Transient
+	private String token;
 
 	public Long getId() {
 		return id;
@@ -82,12 +85,21 @@ public class User implements EntityBase {
 		this.status = status;
 	}
 
-	public Integer getFamily() {
-		return family;
+
+	public String getToken() {
+		return token;
 	}
 
-	public void setFamily(Integer family) {
-		this.family = family;
+	public void setToken(String token) {
+		this.token = token;
+	}
+
+	public Integer getFamilyid() {
+		return familyid;
+	}
+
+	public void setFamilyid(Integer familyid) {
+		this.familyid = familyid;
 	}
 	
 }

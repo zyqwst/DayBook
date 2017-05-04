@@ -6,6 +6,7 @@ package com.albert.controller;
 import javax.annotation.Resource;
 
 import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -27,23 +28,24 @@ public class LoginController extends BaseController {
 	@Resource
 	private UserService userService;
 	@RequestMapping("/login")
-	public RestEntity login(String username ,String password){
+	public RestEntity login(@RequestBody User user){
 		try {
-			if(StringUtils.isEmpty(username)){
+			if(user==null){
+				throw new BookException("用户名密码不可为空");
+			}
+			if(StringUtils.isEmpty(user.getName())){
 				throw new BookException("请输入用户名");
 			}
-			if(StringUtils.isEmpty(password)){
+			if(StringUtils.isEmpty(user.getPassword())){
 				throw new BookException("请输入密码");
 			}
-			User user = new User();
-			user.setPassword(password);
-			if(com.albert.utils.StringUtils.isNumeric(username)){
-				user.setId(Long.parseLong(username));
+			if(com.albert.utils.StringUtils.isNumeric(user.getName())){
+				user.setId(Long.parseLong(user.getName()));
 			}else{
-				user.setName(username);
+				user.setName(user.getName());
 			}
 			userService.login(user);
-			return RestEntity.success();
+			return RestEntity.success(user);
 		} catch (BookException e) {
 			e.printStackTrace();
 			return RestEntity.failed(e.getMessage());
