@@ -55,13 +55,18 @@ public  class  CommonDaoImpl  implements CommonDao{
 
 	@Override
 	public <T extends EntityBase> T findEntity(Class<T> clazz ,String hql, List<Object> params) throws BookException {
-		Query  query = em.createQuery(" FROM " + clazz.getName() + hql );
-		if(params!=null && params.size()>0){
-			for(int i = 1;i<=params.size();i++){
-				query.setParameter(i, params.get(i-1));
+		try {
+			Query  query = em.createQuery(" FROM " + clazz.getName() + hql );
+			if(params!=null && params.size()>0){
+				for(int i = 1;i<=params.size();i++){
+					query.setParameter(i, params.get(i-1));
+				}
 			}
-		}
-		return  (T) query.getSingleResult();  
+			return  (T) query.getSingleResult();
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new BookException(e.getMessage());
+		} 
 	}
 	@Override
 	public <T extends EntityBase> List<T> findAll(Class<T> clazz ,String hql, List<Object> params) throws BookException {
