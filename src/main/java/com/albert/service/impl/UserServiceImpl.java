@@ -42,7 +42,7 @@ public class UserServiceImpl implements UserService {
 		User u = null;
 		if(user.getId()!=null){
 			u = commonDao.findEntity(User.class, " where id=? ", new Value().add(user.getId()).getParams());
-		}else if(StringUtils.isEmpty(user.getName())){
+		}else if(!StringUtils.isEmpty(user.getName())){
 			u = commonDao.findEntity(User.class, " where name=? or alias=? ", new Value().add(user.getName()).add(user.getName()).getParams());
 		}
 		if(u==null) throw new BookException("用户名或密码不存在");
@@ -50,6 +50,7 @@ public class UserServiceImpl implements UserService {
 			throw new BookException("用户名或密码不存在");
 		}
 		TokenModel token =tokenManager.createToken(u.getId());
+		user.setId(u.getId());
 		user.setToken(token.getToken());
 	}
 
