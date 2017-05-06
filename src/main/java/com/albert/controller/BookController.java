@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.albert.annotation.Authorization;
 import com.albert.domain.RestEntity;
 import com.albert.domain.table.Book;
 import com.albert.domain.view.QueryBook;
-import com.albert.security.Authorization;
 import com.albert.service.BookService;
 import com.albert.service.CommonService;
 import com.albert.utils.BookException;
@@ -87,7 +87,7 @@ public class BookController extends BaseController {
 	public RestEntity save( @RequestBody  @Valid Book book, BindingResult result){
 		if(result.hasErrors()){
 			result.getAllErrors();
-			return RestEntity.failed("参数校验错误");
+			return RestEntity.failed("参数校验错误:"+result.getAllErrors().get(0));
 		}
 		try {
 			commonService.save(book);

@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.albert.annotation.Authorization;
+import com.albert.annotation.Subject;
 import com.albert.domain.RestEntity;
 import com.albert.domain.table.User;
 import com.albert.service.UserService;
@@ -46,6 +48,17 @@ public class LoginController extends BaseController {
 			}
 			userService.login(user);
 			return RestEntity.success(user);
+		} catch (BookException e) {
+			e.printStackTrace();
+			return RestEntity.failed(e.getMessage());
+		}
+	}
+	@Authorization
+	@RequestMapping("/logout")
+	public RestEntity logout(@Subject User user){
+		try {
+			userService.logout(user);
+			return RestEntity.success();
 		} catch (BookException e) {
 			e.printStackTrace();
 			return RestEntity.failed(e.getMessage());
