@@ -107,6 +107,20 @@ public class BookController extends BaseController {
 			return RestEntity.failed(e.getMessage());
 		}
 	}
+	
+	@Authorization
+	@RequestMapping(value="/amount")
+	public RestEntity amount(HttpServletRequest request){
+		try {
+			RequestMap map = getRequestMap(request);
+			ConvertSqlByForm.convert(map);
+			Double val = commonService.getSum(Book.class, "val", map.getJpql().toString(), map.getParams());
+			return RestEntity.success(val);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return RestEntity.failed(e.getMessage());
+		}
+	}
 	public BookService getBookService() {
 		return bookService;
 	}

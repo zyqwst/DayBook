@@ -91,7 +91,8 @@ public class ConvertSqlByForm {
 		}
 		if(value.toString().endsWith("_INTEGER")){
 			return Integer.parseInt(value.toString().replaceAll("_INTEGER", ""));
+		}else{
+			return value;
 		}
-		return null;
 	}
 }
