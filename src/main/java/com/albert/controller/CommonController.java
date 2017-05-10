@@ -11,9 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.albert.annotation.Authorization;
 import com.albert.domain.RestEntity;
 import com.albert.domain.table.Dictionary;
+import com.albert.security.Authorization;
 import com.albert.service.CommonService;
 import com.albert.utils.BookException;
 import com.albert.utils.Value;

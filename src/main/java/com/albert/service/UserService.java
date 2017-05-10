@@ -16,5 +16,4 @@ import com.albert.utils.BookException;
 public interface UserService {
 	public void save(User user) throws BookException;
 	public void login(User user) throws BookException;
-	public void logout(User user) throws BookException;
 }

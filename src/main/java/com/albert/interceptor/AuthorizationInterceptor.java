@@ -12,9 +12,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import com.albert.annotation.Authorization;
 import com.albert.domain.Constants;
 import com.albert.domain.RestEntity;
+import com.albert.security.Authorization;
 import com.albert.security.TokenManager;
 import com.albert.security.TokenModel;
 import com.google.gson.Gson;
@@ -45,7 +45,10 @@ public class AuthorizationInterceptor extends HandlerInterceptorAdapter {
         //如果验证token失败，并且方法注明了Authorization，返回401错误
         if (method.getAnnotation(Authorization.class) != null) {
 //            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+<<<<<<< HEAD
         	
+=======
+>>>>>>> f8d9de3993312e3753a79a16d0ce99e19f7643d6
             response.setContentType("application/json;charset=UTF-8");
             PrintWriter out = response.getWriter();
             Gson gson = new Gson();
