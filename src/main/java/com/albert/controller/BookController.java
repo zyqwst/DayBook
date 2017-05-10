@@ -1,5 +1,7 @@
 package com.albert.controller;
 
+import java.util.Date;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -21,6 +23,7 @@ import com.albert.service.BookService;
 import com.albert.service.CommonService;
 import com.albert.utils.BookException;
 import com.albert.utils.ConvertSqlByForm;
+import com.albert.utils.DateUtils;
 import com.albert.utils.Page;
 import com.albert.utils.RequestMap;
 import com.albert.utils.Value;
@@ -90,6 +93,9 @@ public class BookController extends BaseController {
 			return RestEntity.failed("参数校验错误");
 		}
 		try {
+			if(book.getCredate().equals(DateUtils.getTrDate(new Date()))){
+				book.setCredate(DateUtils.getTrDate2(new Date()));
+			}
 			commonService.save(book);
 		} catch (BookException e) {
 			e.printStackTrace();
