@@ -12,9 +12,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import com.albert.annotation.Authorization;
 import com.albert.domain.Constants;
 import com.albert.domain.RestEntity;
+import com.albert.security.Authorization;
 import com.albert.security.TokenManager;
 import com.albert.security.TokenModel;
 import com.google.gson.Gson;

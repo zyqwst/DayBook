@@ -97,10 +97,6 @@ public class BookController extends BaseController {
 		}
 		return RestEntity.success();
 	}
-<<<<<<< HEAD
-	
-	
-=======
 	@RequestMapping(value="/month")
 	public RestEntity monthBill(String yearAndMonth){
 		try {
@@ -111,7 +107,6 @@ public class BookController extends BaseController {
 			return RestEntity.failed(e.getMessage());
 		}
 	}
->>>>>>> f8d9de3993312e3753a79a16d0ce99e19f7643d6
 	public BookService getBookService() {
 		return bookService;
 	}
