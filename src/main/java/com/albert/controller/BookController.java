@@ -97,30 +97,8 @@ public class BookController extends BaseController {
 		}
 		return RestEntity.success();
 	}
-	@RequestMapping(value="/month")
-	public RestEntity monthBill(String yearAndMonth){
-		try {
-			Double db = commonService.getSum(Book.class, "val", " where credate like ?", new Value().add(yearAndMonth+"%").getParams());
-			return RestEntity.success(db);
-		} catch (BookException e) {
-			e.printStackTrace();
-			return RestEntity.failed(e.getMessage());
-		}
-	}
 	
-	@Authorization
-	@RequestMapping(value="/amount")
-	public RestEntity amount(HttpServletRequest request){
-		try {
-			RequestMap map = getRequestMap(request);
-			ConvertSqlByForm.convert(map);
-			Double val = commonService.getSum(Book.class, "val", map.getJpql().toString(), map.getParams());
-			return RestEntity.success(val);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return RestEntity.failed(e.getMessage());
-		}
-	}
+	
 	public BookService getBookService() {
 		return bookService;
 	}
