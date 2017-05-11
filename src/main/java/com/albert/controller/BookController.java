@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.albert.domain.Constants;
 import com.albert.domain.RestEntity;
 import com.albert.domain.table.Book;
 import com.albert.domain.view.QueryBook;
@@ -87,7 +88,8 @@ public class BookController extends BaseController {
 		}
 	}
 	@RequestMapping(value="/save",method={RequestMethod.POST})
-	public RestEntity save( @RequestBody  @Valid Book book, BindingResult result){
+	public RestEntity save( @RequestBody  @Valid Book book, BindingResult result,HttpServletRequest request){
+		RequestMap map = getRequestMap(request);
 		if(result.hasErrors()){
 			result.getAllErrors();
 			return RestEntity.failed("参数校验错误");
@@ -96,6 +98,7 @@ public class BookController extends BaseController {
 			if(book.getCredate().equals(DateUtils.getTrDate(new Date()))){
 				book.setCredate(DateUtils.getTrDate2(new Date()));
 			}
+			book.setUserid(Long.valueOf(request.getAttribute(Constants.CURRENT_USER_ID).toString()));
 			commonService.save(book);
 		} catch (BookException e) {
 			e.printStackTrace();

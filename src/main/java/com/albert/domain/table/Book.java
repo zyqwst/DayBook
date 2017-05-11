@@ -30,6 +30,7 @@ public class Book implements EntityBase {
 	@NotNull(message="请输入消费金额")
 	private Double val;
 	
+	private Long userid;
 
 	@Override
 	public String toString() {
@@ -67,6 +68,14 @@ public class Book implements EntityBase {
 
 	public void setCredate(String credate) {
 		this.credate = credate;
+	}
+
+	public Long getUserid() {
+		return userid;
+	}
+
+	public void setUserid(Long userid) {
+		this.userid = userid;
 	}
 
 
