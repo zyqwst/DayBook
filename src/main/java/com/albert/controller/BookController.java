@@ -16,9 +16,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.albert.annotation.Authorization;
-import com.albert.domain.Constants;
+import com.albert.annotation.Subject;
 import com.albert.domain.RestEntity;
 import com.albert.domain.table.Book;
+import com.albert.domain.table.User;
 import com.albert.domain.view.QueryBook;
 import com.albert.service.BookService;
 import com.albert.service.CommonService;
@@ -71,10 +72,11 @@ public class BookController extends BaseController {
 	}
 	@Authorization
 	@RequestMapping(value = "/list")
-	public RestEntity list(HttpServletRequest request,Integer page,Integer size){
+	public RestEntity list(HttpServletRequest request,Integer page,Integer size,@Subject User user){
 		try {
 			System.out.println("请求");
 			RequestMap map = getRequestMap(request);
+			map.put("familyid_and_INTEGER", user.getFamilyid());
 			ConvertSqlByForm.convert(map);
 			if(size==null){
 				page = Page.MAX_PAGE;
@@ -88,8 +90,7 @@ public class BookController extends BaseController {
 		}
 	}
 	@RequestMapping(value="/save",method={RequestMethod.POST})
-	public RestEntity save( @RequestBody  @Valid Book book, BindingResult result,HttpServletRequest request){
-		RequestMap map = getRequestMap(request);
+	public RestEntity save( @RequestBody  @Valid Book book, BindingResult result,@Subject User user){
 		if(result.hasErrors()){
 			result.getAllErrors();
 			return RestEntity.failed("参数校验错误");
@@ -98,7 +99,7 @@ public class BookController extends BaseController {
 			if(book.getCredate().equals(DateUtils.getTrDate(new Date()))){
 				book.setCredate(DateUtils.getTrDate2(new Date()));
 			}
-			book.setUserid(Long.valueOf(request.getAttribute(Constants.CURRENT_USER_ID).toString()));
+			book.setUserid(user.getId());
 			commonService.save(book);
 		} catch (BookException e) {
 			e.printStackTrace();
