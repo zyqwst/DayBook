@@ -53,7 +53,10 @@ public class UserServiceImpl implements UserService {
 		user.setId(u.getId());
 		user.setToken(token.getToken());
 	}
-
+	@Override
+	public void logout(User user) throws BookException {
+		tokenManager.deleteToken(user.getId());
+	}
 	public CommonDao getCommonDao() {
 		return commonDao;
 	}
