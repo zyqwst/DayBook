@@ -1,5 +1,5 @@
 # DayBook 说明
-　　`*DayBook*`——流水账应用服务端。为什么要创建这么个APP呢？很多人肯定都会说记账应用烂大街了。
+　　`*记一笔*`——流水账应用服务端。为什么要创建这么个APP呢？很多人肯定都会说记账应用烂大街了。
 
 　　工资不算低，但是每个月下来还是月光，想分析下每个月的流水，钱到底跑那儿去了。下载了几款成熟的记账APP，好家伙，广告、理财乱七八糟的各种推送。算了自己来吧！
 
@@ -30,3 +30,20 @@ mvn clean package assembly:single -Pprod -Dmaven.test.skip=true
 start jre/bin/javaw -jar  DayBook-0.0.1-SNAPSHOT.jar
 ```
 双击start.bat即可启动
+
+## App截图
+
+![登录](http://upload-images.jianshu.io/upload_images/2287481-8e76339928cc64ee.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+![home页](http://upload-images.jianshu.io/upload_images/2287481-05581a5407f2388b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+![记账](http://upload-images.jianshu.io/upload_images/2287481-2f4e2d1c92fb4cb0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+
+![记账](http://upload-images.jianshu.io/upload_images/2287481-e6bc7043a49d1a51.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+![月账单](http://upload-images.jianshu.io/upload_images/2287481-5095423f4ab2beda.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+![饼状图分析](http://upload-images.jianshu.io/upload_images/2287481-cd1936f4c4c49ef9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+![饼状图分析](http://upload-images.jianshu.io/upload_images/2287481-7ccb38fb1fd83a14.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
