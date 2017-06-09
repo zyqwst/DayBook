@@ -11,11 +11,12 @@
 
 ## 内容说明
 系统默认启动端口是9971，修改端口可以再src/main/resources/application.properties文件中修改 
-###server.port=端口
+
+### server.port=端口
 
 ## 系统打包
 在项目根目录下直接运行下面的命令
-mvn clean package assembly:single -Pprod -Dmaven.test.skip=true
+`mvn clean package assembly:single -Pprod -Dmaven.test.skip=true`
 打包成功后在根目录下target/DayBook即为打包的结果。
 ```
 ├── conf
@@ -25,10 +26,14 @@ mvn clean package assembly:single -Pprod -Dmaven.test.skip=true
 ```
 ## 系统启动
 上一步打包后，从命令行进入target/DayBook根目录；执行 `java -jar DayBook-0.0.1-SNAPSHOT.jar`即可看到启动过程。
-如果不需要本机JRE运行，在window环境下，拷贝jre到target/DayBook根目录，新建start.bat文件，内容为
+如果不需要本机JRE运行
+##### 在window环境下，拷贝jre到DayBook根目录，新建start.bat文件，内容为
 ```
 start jre/bin/javaw -jar  DayBook-0.0.1-SNAPSHOT.jar
 ```
+##### 在Linux，同样拷贝jre到DayBook根目录，然后在DayBook根目录执行命令
+`nohup jre/bin/java -jar DayBook-0.0.1-SNAPSHOT.jar > start &
+`
 双击start.bat即可启动
 
 ## App截图
