@@ -27,14 +27,13 @@
 ## 系统启动
 上一步打包后，从命令行进入target/DayBook根目录；执行 `java -jar DayBook-0.0.1-SNAPSHOT.jar`即可看到启动过程。
 如果不需要本机JRE运行
-##### 在window环境下，拷贝jre到DayBook根目录，新建start.bat文件，内容为
+##### 在window环境下，拷贝jre到DayBook根目录，新建start.bat文件，内容如下，双击start.bat即可启动
 ```
 start jre/bin/javaw -jar  DayBook-0.0.1-SNAPSHOT.jar
 ```
 ##### 在Linux，同样拷贝jre到DayBook根目录，然后在DayBook根目录执行命令
 `nohup jre/bin/java -jar DayBook-0.0.1-SNAPSHOT.jar > start &
 `
-双击start.bat即可启动
 
 ## App截图
 
