@@ -76,7 +76,7 @@ public class BookController extends BaseController {
 		try {
 			System.out.println("请求");
 			RequestMap map = getRequestMap(request);
-			map.put("familyid_and_INTEGER", user.getFamilyid());
+			map.put("familyid_and", user.getFamilyid()+"_INTEGER");
 			ConvertSqlByForm.convert(map);
 			if(size==null){
 				page = Page.MAX_PAGE;

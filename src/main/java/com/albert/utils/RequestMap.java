@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -23,14 +24,14 @@ public class RequestMap extends HashMap<String,Object> implements Map<String,Obj
 	 */
 	private static final long serialVersionUID = -3992467218030905913L;
 	private HttpServletRequest request;
-	Map<String, Object> map = null;
+	LinkedHashMap<String, Object> map = null;
 	
 	private StringBuilder jpql = new StringBuilder();
 	private List<Object> params = new ArrayList<Object>();
 	
 	public RequestMap(HttpServletRequest request){
 		if(request==null) {
-			map = new HashMap<>(); 
+			map = new LinkedHashMap<>(); 
 			return;
 		}
 		this.request = request;
@@ -39,7 +40,7 @@ public class RequestMap extends HashMap<String,Object> implements Map<String,Obj
 		Map.Entry<?,?> entry;
 		String name = "";
 		String value = "";
-		Map<String,Object> returnMap = new HashMap<String,Object>(); 
+		LinkedHashMap<String,Object> returnMap = new LinkedHashMap<String,Object>(); 
 		while(it.hasNext()){
 			entry = (Map.Entry<?,?>) it.next();
 			name = (String) entry.getKey();
