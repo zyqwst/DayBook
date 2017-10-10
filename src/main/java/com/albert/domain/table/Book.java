@@ -31,6 +31,8 @@ public class Book implements EntityBase {
 	private Double val;
 	
 	private Long userid;
+	
+	private String remark;
 
 	@Override
 	public String toString() {
@@ -76,6 +78,14 @@ public class Book implements EntityBase {
 
 	public void setUserid(Long userid) {
 		this.userid = userid;
+	}
+
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
 	}
 
 

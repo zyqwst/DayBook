@@ -27,6 +27,8 @@ public class QueryBook implements EntityBase {
 	private Integer orderby;
 	
 	private String icon;
+	
+	private  String remark;
 
 	public Long getId() {
 		return id;
@@ -83,6 +85,14 @@ public class QueryBook implements EntityBase {
 
 	public void setIcon(String icon) {
 		this.icon = icon;
+	}
+
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
 	}
 
 }
