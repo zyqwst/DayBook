@@ -20,11 +20,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/")
 public class IndexController  extends BaseController implements ErrorController {
 
-	@RequestMapping(value={"","index"})
-	public String index(HttpServletRequest request){
-		System.out.println(request.getRequestURI());
-		return "系统成功启动";
-	}
+//	@RequestMapping(value={"","index"})
+//	public String index(HttpServletRequest request){
+//		System.out.println(request.getRequestURI());
+//		return "系统成功启动";
+//	}
 	@Override
 	public String getErrorPath() {
 		return null;
